@@ -31,3 +31,11 @@ logging:
       springframework:
         cloud:
           gateway: TRACE
+
+# Torna este serviço um cliente eureka
+eureka:
+  client:
+    serviceUrl:
+      defautlZone: 'http://localhost:8761/eureka'
+    instance:
+      hostname: localhost
