@@ -1,0 +1,23 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ead-api-gateway
+
+#há duas forma de definir as rotas no API Gateway, através de classes de configuração
+#e através properties (que será usado abaixo)
+#Definição de rotas para os respectivos microservices
+  cloud:
+    gateway:
+      routes:
+        # Rota para o auth user service
+        - id: authuser-service
+          uri: http://localhost:8087/
+          predicates:
+            - Path=/ead-authuser/**
+        # Rota para o course service
+        - id: course-service
+          uri: http://localhost:8082/
+          predicates:
+            - Path=/ead-course/**
