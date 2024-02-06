@@ -21,3 +21,13 @@ spring:
           uri: http://localhost:8082/
           predicates:
             - Path=/ead-course/**
+
+# Tracing das requisições - consigo ver como o API
+# Gateway faz o roteamento das requisições para
+# o respectivo serviço capaz de atender a requisição
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: TRACE
