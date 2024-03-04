@@ -5,9 +5,9 @@ spring:
   application:
     name: ead-api-gateway
 
-#há duas forma de definir as rotas no API Gateway, através de classes de configuração
-#e através properties (que será usado abaixo)
-#Definição de rotas para os respectivos microservices
+#hÃ¡ duas forma de definir as rotas no API Gateway, atravÃ©s de classes de configuraÃ§Ã£o
+#e atravÃ©s properties (que serÃ¡ usado abaixo)
+#DefiniÃ§Ã£o de rotas para os respectivos microservices
   cloud:
     gateway:
       routes:
@@ -21,10 +21,14 @@ spring:
           uri: lb:http://EAD-COURSE-SERVICE/
           predicates:
             - Path=/ead-course/**
-
-# Tracing das requisições - consigo ver como o API
-# Gateway faz o roteamento das requisições para
-# o respectivo serviço capaz de atender a requisição
+        # Rota para o notification service
+        - id: notification-service
+          uri: lb:http://EAD-NOTIFICATION-SERVICE/
+          predicates:
+            - Path=/ead-notification/**
+# Tracing das requisiÃ§Ãµes - consigo ver como o API
+# Gateway faz o roteamento das requisiÃ§Ãµes para
+# o respectivo serviÃ§o capaz de atender a requisiÃ§Ã£o
 logging:
   level:
     org:
@@ -32,7 +36,7 @@ logging:
         cloud:
           gateway: TRACE
 
-# Torna este serviço um cliente eureka
+# Torna este serviÃ§o um cliente eureka
 eureka:
   client:
     serviceUrl:
